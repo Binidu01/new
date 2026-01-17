@@ -2,7 +2,7 @@
   "name": "Bini.js App",
   "short_name": "BiniApp",
   "description": "Modern React application built with Bini.js",
-  "start_url": "./new",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#00CFFF",
