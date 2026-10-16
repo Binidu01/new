@@ -58,7 +58,6 @@ jobs:
 
       - name: Read app version
         id: version
-        shell: bash
         run: |
           set -eu
           version="$(jq -r '.version // empty' package.json)"
@@ -69,6 +68,7 @@ jobs:
           echo "value=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build iOS app
+        id: build
         env:
           IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
           IOS_CERTIFICATE_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
@@ -78,34 +78,65 @@ jobs:
           APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
           APPLE_API_KEY_P8: ${{ secrets.APPLE_API_KEY_P8 }}
         run: |
-          if [ -z "$APPLE_DEVELOPMENT_TEAM" ]; then unset APPLE_DEVELOPMENT_TEAM; fi
-          if [ -n "$APPLE_API_KEY_P8" ]; then
+          set -eu
+
+          have_api=false
+          if [ -n "$APPLE_API_KEY_P8" ] && [ -n "$APPLE_API_KEY" ] && [ -n "$APPLE_API_ISSUER" ]; then
             key_path="$RUNNER_TEMP/AuthKey.p8"
             echo "$APPLE_API_KEY_P8" | base64 --decode > "$key_path"
-            echo "APPLE_API_KEY_PATH=$key_path" >> "$GITHUB_ENV"
+            export APPLE_API_KEY_PATH="$key_path"
+            have_api=true
           fi
+
+          have_cert=false
           if [ -n "$IOS_CERTIFICATE" ] && [ -n "$IOS_CERTIFICATE_PASSWORD" ] && [ -n "$IOS_MOBILE_PROVISION" ]; then
+            have_cert=true
+          fi
+
+          if [ "$have_api" = true ] && [ "$have_cert" = true ]; then
+            echo "Building a signed IPA with the provided certificate and provisioning profile."
             pnpm run ios:build --export-method app-store-connect
-          elif [ -n "$APPLE_API_KEY_P8" ] && [ -n "$APPLE_DEVELOPMENT_TEAM" ]; then
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          elif [ "$have_api" = true ] && [ -n "$APPLE_DEVELOPMENT_TEAM" ]; then
             echo "Using Xcode automatic signing with the App Store Connect API key."
             pnpm run ios:build --export-method app-store-connect
+            echo "signed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "No iOS signing secrets found: building for the simulator only."
+            echo "No complete iOS signing setup found: building for the simulator only."
             unset IOS_CERTIFICATE IOS_CERTIFICATE_PASSWORD IOS_MOBILE_PROVISION
+            unset APPLE_DEVELOPMENT_TEAM APPLE_API_ISSUER APPLE_API_KEY APPLE_API_KEY_P8 APPLE_API_KEY_PATH
             tmp="$(mktemp)"
             jq 'del(.bundle.iOS.developmentTeam)' src-tauri/tauri.conf.json > "$tmp"
             mv "$tmp" src-tauri/tauri.conf.json
             pnpm run ios:build --target aarch64-sim --debug
+            echo "signed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/upload-artifact@v4.4.3
+      - name: Package simulator app
+        if: steps.build.outputs.signed == 'false'
+        run: |
+          app="$(find src-tauri/gen/apple/build -name '*.app' -maxdepth 4 | head -n1)"
+          test -n "$app" || { echo "::error title=No .app found::The simulator build produced no .app bundle."; exit 1; }
+          ditto -c -k --keepParent "$app" "$GITHUB_WORKSPACE/ios-simulator.zip"
+
+      - name: Upload simulator build
+        if: steps.build.outputs.signed == 'false'
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: ios-simulator
+          path: ios-simulator.zip
+          if-no-files-found: error
+
+      - name: Upload IPA
+        if: steps.build.outputs.signed == 'true'
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: ios
           path: src-tauri/gen/apple/build/**/*.ipa
-          if-no-files-found: warn
+          if-no-files-found: error
 
       - name: Publish GitHub release
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && steps.build.outputs.signed == 'true'
         uses: softprops/action-gh-release@v2.0.9
         with:
           tag_name: v${{ steps.version.outputs.value }}
