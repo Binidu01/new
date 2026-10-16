@@ -1,2 +1,2 @@
 minimumReleaseAgeExclude:
-  - bini-deploy@2.0.4
+  - bini-deploy@2.0.4 || 2.0.5

@@ -43,7 +43,7 @@
     "oxlint": "latest",
     "oxfmt": "latest",
     "bini-env": "latest",
-    "bini-deploy": "2.0.4",
+    "bini-deploy": "2.0.5",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/node": "latest",
