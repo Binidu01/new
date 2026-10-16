@@ -58,6 +58,7 @@ jobs:
 
       - name: Read app version
         id: version
+        shell: bash
         run: |
           set -eu
           version="$(jq -r '.version // empty' package.json)"
