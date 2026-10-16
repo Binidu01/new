@@ -109,7 +109,7 @@ jobs:
             tmp="$(mktemp)"
             jq 'del(.bundle.iOS.developmentTeam)' src-tauri/tauri.conf.json > "$tmp"
             mv "$tmp" src-tauri/tauri.conf.json
-            pnpm run ios:build --target aarch64-sim --debug
+            pnpm run ios:build --target aarch64-sim
             echo "signed=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -121,7 +121,8 @@ jobs:
             echo "::error title=No .app found::The simulator build produced no .app bundle."
             exit 1
           fi
-          ditto -c -k --keepParent "$app" "$GITHUB_WORKSPACE/ios-simulator.zip"
+          cd "$(dirname "$app")"
+          zip -r -y "$GITHUB_WORKSPACE/ios-simulator.zip" "$(basename "$app")"
 
       - name: Upload simulator build
         if: steps.build.outputs.signed == 'false'

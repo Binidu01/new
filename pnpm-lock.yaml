@@ -55,8 +55,8 @@ importers:
         specifier: latest
         version: 6.1.2(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2))
       bini-deploy:
-        specifier: 2.0.5
-        version: 2.0.5(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2))
+        specifier: 2.0.6
+        version: 2.0.6(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2))
       bini-env:
         specifier: latest
         version: 2.0.0(hono@4.13.13)(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2))
@@ -1249,8 +1249,8 @@ packages:
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
 
-  bini-deploy@2.0.5:
-    resolution: {integrity: sha512-O0TgP+QWtsf5bz6luc2bDmvPiC2FTnoYydLVMxJLlcrsGeNDH6K036bSPikOPU/LsJ0n8+xEEVpP7uoWQPHlKw==}
+  bini-deploy@2.0.6:
+    resolution: {integrity: sha512-cBmYw1fX8oFpMOPUAjGTfmS7kknvDFtGQtfD5tbNYTXLQY0rGd9K2lEdgXwIlY4ZIHzYOawqDJiCbR41demCkw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -2870,7 +2870,7 @@ snapshots:
 
   bail@2.0.2: {}
 
-  bini-deploy@2.0.5(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2)):
+  bini-deploy@2.0.6(vite@8.3.4(@types/node@26.6.5)(jiti@2.7.0)(terser@5.51.2)):
     dependencies:
       '@clack/prompts': 1.8.1
       chalk: 6.0.1
