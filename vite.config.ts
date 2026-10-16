@@ -26,6 +26,7 @@ export default defineConfig(async ({ mode, isSsrBuild }): Promise<UserConfig> =>
   const native = isTauri && !isSsrBuild ? (await import(/* @vite-ignore */ nativePkg)).biniNative() : null;
 
   return {
+      base: './',
     plugins: [
       tailwindcss(),
       react(),
