@@ -52,6 +52,15 @@ jobs:
           else npm ci
           fi
 
+      - name: Generate app icons
+        shell: bash
+        run: |
+          if [ -f pnpm-lock.yaml ]; then pnpm run tauri:icon
+          elif [ -f yarn.lock ]; then yarn run tauri:icon
+          elif [ -f bun.lock ] || [ -f bun.lockb ]; then bun run tauri:icon
+          else npm run tauri:icon
+          fi
+
       - name: Initialize Android project (if missing)
         run: |
           if [ ! -d src-tauri/gen/android ]; then
