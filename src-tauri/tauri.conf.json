@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "New",
+  "productName": "newapp",
   "version": "0.1.0",
   "identifier": "com.bini.new",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "New",
+        "title": "newapp",
         "width": 800,
         "height": 600,
         "resizable": true,
