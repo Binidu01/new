@@ -21,6 +21,9 @@ jobs:
         with:
           version: 10
 
+      - uses: oven-sh/setup-bun@v2
+        if: hashFiles('bun.lock', 'bun.lockb') != ''
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
@@ -68,13 +71,30 @@ jobs:
             npx tauri android init --ci
           fi
 
-      - name: Write keystore.properties
-        if: env.ANDROID_KEY_BASE64 != ''
+      # A step's own `env:` is not visible to that step's `if:`, so the secrets are
+      # exported to $GITHUB_ENV here; the `if: env.X != ''` checks below rely on it.
+      # Only secrets that have a value are exported.
+      - name: Export signing secrets that are set
+        shell: bash
         env:
           ANDROID_KEY_BASE64: ${{ secrets.ANDROID_KEY_BASE64 }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          for name in ANDROID_KEY_BASE64 ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD ANDROID_KEYSTORE_PASSWORD; do
+            value="${!name}"
+            if [ -n "$value" ]; then
+              {
+                echo "$name<<__BINI_EOF__"
+                echo "$value"
+                echo "__BINI_EOF__"
+              } >> "$GITHUB_ENV"
+            fi
+          done
+
+      - name: Write keystore.properties
+        if: env.ANDROID_KEY_BASE64 != ''
         run: |
           KEYSTORE="$RUNNER_TEMP/keystore.jks"
           echo "$ANDROID_KEY_BASE64" | base64 --decode > "$KEYSTORE"
