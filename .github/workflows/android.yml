@@ -3,7 +3,7 @@ name: Android
 
 on:
   push:
-    branches: [release]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -102,7 +102,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish GitHub release
-        if: github.ref == 'refs/heads/release'
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: app-v${{ steps.version.outputs.value }}
