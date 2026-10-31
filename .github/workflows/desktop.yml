@@ -61,7 +61,8 @@ jobs:
           if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile
           elif [ -f yarn.lock ]; then yarn install --frozen-lockfile
           elif [ -f bun.lock ] || [ -f bun.lockb ]; then bun install --frozen-lockfile
-          else npm ci
+          elif [ -f package-lock.json ]; then npm ci
+          else npm install
           fi
 
       - name: Generate app icons
