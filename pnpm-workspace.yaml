@@ -2,3 +2,5 @@ minimumReleaseAgeExclude:
   - bini-deploy@2.1.1
   - bini-router@2.2.2
   - bini-ssg@2.0.5
+  - bini-env@2.0.1
+  - bini-server@2.0.1

@@ -29,7 +29,7 @@
   "dependencies": {
     "bini-overlay": "^2.1.2",
     "bini-router": "2.2.2",
-    "bini-server": "^2.0.0",
+    "bini-server": "2.0.1",
     "bini-ssg": "2.0.5",
     "hono": "^4.13.13",
     "react": "^19.3.1",
@@ -44,7 +44,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "bini-deploy": "2.1.1",
-    "bini-env": "^2.0.0",
+    "bini-env": "2.0.1",
     "bini-native": "^2.0.0",
     "oxfmt": "^0.74.0",
     "oxlint": "^1.89.0",

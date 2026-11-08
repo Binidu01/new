@@ -16,13 +16,13 @@ importers:
         version: 2.1.2(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       bini-router:
         specifier: 2.2.2
-        version: 2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+        version: 2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       bini-server:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: 2.0.1
+        version: 2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       bini-ssg:
         specifier: 2.0.5
-        version: 2.0.5(bini-router@2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+        version: 2.0.5(bini-router@2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       hono:
         specifier: ^4.13.13
         version: 4.13.17
@@ -58,11 +58,11 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       bini-env:
-        specifier: ^2.0.0
-        version: 2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+        specifier: 2.0.1
+        version: 2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       bini-native:
         specifier: ^2.0.0
-        version: 2.0.0(bini-router@2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+        version: 2.0.0(bini-router@2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       cross-env:
         specifier: latest
         version: 10.1.0
@@ -1161,12 +1161,15 @@ packages:
     peerDependencies:
       vite: '>=6.0.0'
 
-  bini-env@2.0.0:
-    resolution: {integrity: sha512-hbU0FZ2pZ0rpS/PWencY2c3gR2y1pghorZr9O9G+n/mp/4202NHkWkiaAIjuLqzlpXodnVnQseMn1I/oxIMlrA==}
-    engines: {node: '>=20.19.0 || >=22.12.0'}
+  bini-env@2.0.1:
+    resolution: {integrity: sha512-gpe5ChbC/wbzmqzONuERYyriKyLA7hBvGxotmw5szpKR6OF8wgCVOHMsLAQdntafoxlH7Y5i7m+Uzk3q5Mzi/A==}
+    engines: {node: '>=20.12.0'}
     peerDependencies:
       hono: '>=4.0.0'
       vite: '>=8.0.0'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   bini-native@2.0.0:
     resolution: {integrity: sha512-NKotlBHaa3wgLwUzcKZeY3jHV+4YObEUmueutfupnM2fISK2gSbOCMhMG7prKfRsdHYLIy2WXIdut4hzoXImdw==}
@@ -1190,9 +1193,9 @@ packages:
       react-router-dom: ^7.0.0
       vite: ^8.0.0
 
-  bini-server@2.0.0:
-    resolution: {integrity: sha512-zfxcZ4CO+ov9L9ZXSFjJjKRR/xQGrdaL31FrDbA6SD1L4xXqus4vEs8BcPY5r0qBJuA+zR5XFR+lCzCqMNwhLg==}
-    engines: {node: '>=20.19.0'}
+  bini-server@2.0.1:
+    resolution: {integrity: sha512-m4JvCocV6kVF/PgdgNeVi1rWx/oogkXh9L21t6gErvN6SS5LyRannFwt1VrgW7mi4YG780ZGjqaRzYTTGRM3AQ==}
+    engines: {node: '>=20.12.0'}
     hasBin: true
 
   bini-ssg@2.0.5:
@@ -2766,14 +2769,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
+  bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
     dependencies:
       hono: 4.13.17
+    optionalDependencies:
       vite: 8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)
 
-  bini-native@2.0.0(bini-router@2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
+  bini-native@2.0.0(bini-router@2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
     dependencies:
-      bini-router: 2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+      bini-router: 2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       cross-spawn: 7.0.6
       vite: 8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)
 
@@ -2786,12 +2790,12 @@ snapshots:
       simple-icons: 16.36.0
       vite: 8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)
 
-  bini-router@2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
+  bini-router@2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
     dependencies:
       '@mdx-js/rollup': 3.1.1(rollup@4.68.0)
       '@oxc-project/types': 0.98.0
       '@remix-run/node-fetch-server': 1.0.0
-      bini-env: 2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+      bini-env: 2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       magic-string: 0.30.21
       oxc-parser: 0.150.0
       oxc-walker: 1.1.1(@oxc-project/types@0.98.0)(oxc-parser@0.150.0)(rolldown@1.2.16)
@@ -2810,11 +2814,16 @@ snapshots:
       - rollup
       - supports-color
 
-  bini-server@2.0.0: {}
-
-  bini-ssg@2.0.5(bini-router@2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
+  bini-server@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
     dependencies:
-      bini-router: 2.2.2(bini-env@2.0.0(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+      bini-env: 2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
+    transitivePeerDependencies:
+      - hono
+      - vite
+
+  bini-ssg@2.0.5(bini-router@2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)):
+    dependencies:
+      bini-router: 2.2.2(bini-env@2.0.1(hono@4.13.17)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)))(react-dom@19.3.1(react@19.3.1))(react-router-dom@7.18.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(rolldown@1.2.16)(rollup@4.68.0)(vite@8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2))
       html-minifier-terser: 7.2.0
       node-html-parser: 9.0.7
       vite: 8.3.6(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)
