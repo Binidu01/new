@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite --host --open",
-    "build": "tsc --noEmit && vite build && vite build --ssr src/main.tsx",
+    "build": "tsc --noEmit && vite build",
     "start": "bini-server",
     "preview": "vite preview --host --open",
     "deploy": "bini-deploy",
