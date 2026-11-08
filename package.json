@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite --host --open",
-    "build": "tsc --noEmit && vite build && vite build --ssr src/main.tsx",
+    "build": "tsc --noEmit && vite build",
     "start": "bini-server",
     "preview": "vite preview --host --open",
     "deploy": "bini-deploy",
@@ -13,29 +13,17 @@
     "type-check": "tsc --noEmit",
     "lint": "oxlint src",
     "format": "oxfmt src",
-    "check": "oxlint src && oxfmt src && tsc --noEmit",
-    "dev:native": "vite",
-    "tauri": "tauri",
-    "tauri:dev": "cross-env TAURI=true tauri dev",
-    "tauri:build": "cross-env TAURI=true tauri build",
-    "tauri:icon": "tauri icon public/logo.png",
-    "sign": "npx create-bini-app sign",
-    "doctor": "npx create-bini-app doctor",
-    "android": "cross-env TAURI=true tauri android dev",
-    "android:build": "cross-env TAURI=true tauri android build",
-    "ios": "cross-env TAURI=true tauri ios dev",
-    "ios:build": "cross-env TAURI=true tauri ios build"
+    "check": "oxlint src && oxfmt src && tsc --noEmit"
   },
   "dependencies": {
     "bini-overlay": "^2.1.2",
-    "bini-router": "^2.2.1",
-    "bini-server": "^2.0.0",
-    "bini-ssg": "^2.0.3",
+    "bini-router": "2.2.2",
+    "bini-server": "2.0.1",
+    "bini-ssg": "2.0.5",
     "hono": "^4.13.13",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "react-router-dom": "^7.18.4",
-    "@tauri-apps/api": "latest"
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -44,14 +32,12 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "bini-deploy": "link:C:/Users/rbini/OneDrive/Desktop/bini-deploy",
-    "bini-env": "^2.0.0",
+    "bini-env": "2.0.1",
     "bini-native": "^2.0.0",
     "oxfmt": "^0.74.0",
     "oxlint": "^1.89.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "vite": "^8.3.5",
-    "@tauri-apps/cli": "latest",
-    "cross-env": "latest"
+    "vite": "^8.3.5"
   }
 }

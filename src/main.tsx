@@ -8,6 +8,7 @@ import App, {
   reportBiniError,
 } from 'virtual:bini-app'
 
+
 class LastResortBoundary extends React.Component<
   { children: React.ReactNode },
   { error: Error | null }
@@ -123,111 +124,3 @@ if (typeof window !== 'undefined') {
 }
 
 export { App }
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
-
-export async function render(url: string): Promise<string> {
-  const ReactDOMServer = await import('react-dom/server')
-  const { createElement } = await import('react')
-  const { StaticRouter } = await import('react-router-dom')
-  const {
-    AppRoutes,
-    basename: rawBasename,
-    preloadRoute: preload,
-    resetNavState: reset,
-  } = await import('virtual:bini-app')
-  const { Writable } = await import('stream')
-
-  if (typeof reset === 'function') reset()
-
-  const basename: string = rawBasename
-
-  const normalizedBase = basename === '/' ? '' : basename.replace(/\/$/, '')
-
-  const routePath = url.startsWith('/') ? url : `/${url}`
-
-  const fullUrl =
-    normalizedBase && !routePath.startsWith(normalizedBase)
-      ? `${normalizedBase}${routePath}`
-      : routePath
-
-  try {
-    await preload(routePath)
-  } catch {
-    /* render anyway */
-  }
-
-  const fallbackPage = (error: unknown): string => {
-    const message = error instanceof Error ? error.message : String(error)
-    return (
-      `<!doctype html><html><head><meta charset="utf-8"><title>Server render error</title></head>` +
-      `<body>` +
-      `<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;font-family:system-ui,sans-serif;text-align:center">` +
-      `<h1 style="font-size:1.5rem;margin:0 0 1rem">Server render error</h1>` +
-      `<pre style="max-width:48rem;font-size:0.75rem;padding:0.75rem;border:1px solid #ddd;border-radius:0.5rem;background:#f9f9f9;overflow:auto;text-align:left">${escapeHtml(message)}</pre>` +
-      `</div>` +
-      `</body></html>`
-    )
-  }
-
-  return new Promise<string>((resolve, reject) => {
-    let html = ''
-    const writable = new Writable({
-      write(chunk, _enc, callback) {
-        html += chunk.toString()
-        callback()
-      },
-    })
-
-    let settled = false
-    const finish = (value: string) => {
-      if (settled) return
-      settled = true
-      resolve(value)
-    }
-
-    const { pipe } = ReactDOMServer.renderToPipeableStream(
-      createElement(StaticRouter, { location: fullUrl, basename }, createElement(AppRoutes)),
-      {
-        onAllReady() {
-          writable.on('finish', () => finish(html))
-          writable.on('error', (err: unknown) => {
-            if (import.meta.env.DEV) {
-              if (settled) return
-              settled = true
-              reject(err)
-              return
-            }
-            finish(fallbackPage(err))
-          })
-          pipe(writable)
-        },
-        onShellError(err: unknown) {
-          if (import.meta.env.DEV) {
-            if (settled) return
-            settled = true
-            reject(err)
-            return
-          }
-          finish(fallbackPage(err))
-        },
-        onError(_err: unknown) {},
-      }
-    )
-  })
-}
-
-export async function renderLoading(): Promise<string | null> {
-  const app: any = await import('virtual:bini-app')
-  if (typeof app.loadRootLoading !== 'function') return null
-  const { renderToStaticMarkup } = await import('react-dom/server')
-  const mod = await app.loadRootLoading()
-  return renderToStaticMarkup(React.createElement(mod.default))
-}
